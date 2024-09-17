@@ -19,9 +19,17 @@ namespace lucia {
                 return this->vec[pos];
             }
 
+            constexpr auto begin() {
+                return this->vec.begin();
+            }
+
+            constexpr auto end() {
+                return this->vec.end();
+            }
+
             template<class UnaryFunc>
             constexpr auto for_each(UnaryFunc func) -> UnaryFunc {
-                std::for_each(this->vec.begin(), this->vec.end(), func);
+                std::for_each(this->begin(), this->vec.end(), func);
 
                 return func;
             }
@@ -30,7 +38,7 @@ namespace lucia {
             auto map(Functor &&f) -> lucia::vector<U> {
                 std::vector<U> ret(this->vec.size());
 
-                std::transform(this->vec.begin(), this->vec.end(), ret.begin(), f);
+                std::transform(this->begin(), this->end(), ret.begin(), f);
 
                 return lucia::vector<U>(ret);
             }
