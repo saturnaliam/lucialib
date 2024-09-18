@@ -4,7 +4,8 @@
 #include <algorithm>
 #include <numeric>
 #include <vector>
-namespace lucia {
+
+namespace lstd {
 
     // just a wrapper :3
     template<class T>
@@ -32,15 +33,23 @@ namespace lucia {
                 return this->vec.size();
             }
 
-            auto reverse() -> void {
+            constexpr auto back() -> T {
+                return this->vec.back();
+            }
+
+            constexpr auto front() -> T {
+                return this->vec.front();
+            }
+
+            constexpr auto reverse() -> void {
                 std::reverse(this->begin(), this->end());
             }
 
-            auto reverse_copy() -> lucia::vector<T> {
+            constexpr auto reverse_copy() -> lstd::vector<T> {
                 std::vector<T> dest(this->size());
                 std::reverse_copy(this->begin(), this->end(), dest.begin());
 
-                return lucia::vector<T>(dest);
+                return lstd::vector<T>(dest);
             }
 
             template<class UnaryFunc>
@@ -51,35 +60,46 @@ namespace lucia {
             }
 
             template<typename UnaryFunc, typename U = std::result_of<UnaryFunc(T)>::type>
-            auto map(UnaryFunc &&f) -> lucia::vector<U> {
+            constexpr auto map(UnaryFunc &&f) -> lstd::vector<U> {
                 std::vector<U> ret(this->size());
 
                 std::transform(this->begin(), this->end(), ret.begin(), f);
 
-                return lucia::vector<U>(ret);
+                return lstd::vector<U>(ret);
             }
 
             template<class BinaryFunc>
-            auto accumulate(BinaryFunc &&func) -> T {
+            constexpr auto accumulate(BinaryFunc &&func) -> T {
                 return std::accumulate(this->begin(), this->end(), func);
             }
 
-            auto accumulate(const T &init) -> T {
+            constexpr auto accumulate(const T &init) -> T {
                 return std::accumulate(this->begin(), this->end(), init);
             }
 
-            auto accumulate() -> T {
+            constexpr auto accumulate() -> T {
                 return this->accumulate(0);
             }
 
             template<class BinaryFunc>
-            auto reduce(BinaryFunc &&func) -> T {
+            constexpr auto fold(BinaryFunc &&func) -> T {
                 return std::reduce(this->begin(), this->end(), func);
             }
 
             template<class BinaryFunc>
-            auto reduceRight(BinaryFunc &&func) -> T {
-                return this->reverse_copy().reduce(func);
+            constexpr auto foldRight(BinaryFunc &&func) -> T {
+                return this->reverse_copy().fold(func);
+            }
+
+            constexpr auto push(const T &value) -> void {
+                this->vec.push_back(value);
+            }
+
+            constexpr auto pop() -> T {
+                const T back = this->back();
+                this->vec.pop_back();
+
+                return back;
             }
     };
 }

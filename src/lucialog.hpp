@@ -6,7 +6,7 @@
 #include <ctime>
 #include <iostream>
 
-namespace lucia {
+namespace lstd {
     class Logger {
         private:
             std::filesystem::path log_file;

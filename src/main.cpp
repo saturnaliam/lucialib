@@ -2,7 +2,10 @@
 #include <iostream>
 
 auto main(void) -> int {
-    lucia::vector<int> x({1, 2, 3});
-    auto y = x.reduce([] (auto a, auto b) { return a - b; });
-    std::cout << y;
+    lstd::vector<int> x({1, 2, 3});
+    std::cout << x.pop();
+    std::cout << " " << x.pop();
+    x.push(5);
+    x.reverse();
+    
 }
