@@ -81,6 +81,10 @@ namespace lstd {
                 return this->accumulate(0);
             }
 
+            constexpr auto fold() -> T {
+                return this->accumulate(0);
+            }
+
             template<class BinaryFunc>
             constexpr auto fold(BinaryFunc &&func) -> T {
                 return std::reduce(this->begin(), this->end(), func);
