@@ -1,13 +1,8 @@
-#include "luciatest.hpp"
-#include "luciavector.hpp"
-#include <functional>
+#include "luciaoptional.hpp"
 #include <iostream>
 
-int a(int b) {
-    return b + 5;
-}
 
 auto main(void) -> int {
-    lstd::vector<int> x({1, 2, 3});
-
+    lstd::optional<int> x = std::nullopt;
+    std::cout << x.value(3);
 }
