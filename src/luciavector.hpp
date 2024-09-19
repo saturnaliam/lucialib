@@ -21,8 +21,28 @@ namespace lstd {
                 return this->vec[pos];
             }
 
+            constexpr auto data() -> T* {
+                return this->vec.data();
+            }
+
+            constexpr auto cbegin() {
+                return this->vec.cbegin();
+            }
+
+            constexpr auto const_begin() {
+                return this->cbegin();
+            }
+
             constexpr auto begin() {
                 return this->vec.begin();
+            }
+
+            constexpr auto cend() {
+                return this->vec.cend();
+            }
+
+            constexpr auto const_end() {
+                this->cend();
             }
 
             constexpr auto end() {
@@ -99,11 +119,19 @@ namespace lstd {
                 this->vec.push_back(value);
             }
 
+            constexpr auto push_back(const T &value) -> void {
+                this->push(value);
+            }
+
             constexpr auto pop() -> T {
                 const T back = this->back();
                 this->vec.pop_back();
 
                 return back;
+            }
+
+            constexpr auto pop_back() -> T {
+                return this->pop();
             }
     };
 }
